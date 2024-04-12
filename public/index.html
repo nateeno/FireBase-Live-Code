@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css">
+    <title>Biblotek</title>
+  </head>
+  <body>
+    <div id="collection">
+    <h1>Mitt bibliotek</h1>
+    <form id="addDocForm">
+      <input type="text" id="titel" name="titel" placeholder="Skriv inn boken sin titel" required><br><br>
+      <input type="number" id="side" name="side" placeholder="Skriv antall sider" required><br><br>
+      <input type="text" id="author" name="author" placeholder="Skriv inn forfatterens navn" required><br><br>
+      <input type="checkbox" id="available" name="available"> Boken er tilgjengelig<br><br>
+      <button type="submit"> Submit</button>
+    </form>
+    <br>
+    <br>
+    <select id="orderByField" onchange="window.getAll(this.value)">
+      <option value="titel">Title</option>
+      <option value="author">Author</option>
+    </select>
+    <select id="sortOrder" onchange="window.getAll(undefined, this.value)">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+    <table id="bookTableBody"></table>
+    <table id="bookTable">
+    </div>
+  </body>
+  <script type="module" src="index.js"></script>
+</html>

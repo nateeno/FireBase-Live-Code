@@ -44,7 +44,7 @@ document.getElementById('addDocForm').addEventListener('submit', async function(
   event.preventDefault();
 
   const titel = document.getElementById('titel').value;
-  const side = document.getElementById('side').value;
+  const side = Number(document.getElementById('side').value);  
   const author = document.getElementById('author').value;
   const available = document.getElementById('available').checked;
 
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let cell4 = row.insertCell(3);
     
     cell1.innerHTML = data.titel;
-    cell2.innerHTML = data.side;
+    cell2.innerHTML = Number(data.side);
     cell3.innerHTML = data.author;
     cell4.innerHTML = data.available ? 'Yes' : 'No';
   }
@@ -102,10 +102,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
   - henter bøker som starter på, eller inneholder gitte bokstaver og ord 
 */
 
+// NB: Importerer 'where'
+
+// window: Kan kjøre dem i console log :)
 
 window.getBooksByAuthor = async function(authorName) {
   const books = await getDocs(
-    query(collection(db, "boker"), where("author", "==", authorName))
+    query(collection(db, "boker"), 
+    where("author", "==", authorName))
   );
 
   books.forEach((doc) => {
@@ -125,3 +129,22 @@ window.getBooksByState = async function(state) {
     console.log(doc.data());
   });
 }
+
+
+// Funker ikke siden side er lagret som string i DB
+window.getSide = async function() {
+  console.log("Kjører")
+  const books = await getDocs(
+    query(
+      collection(db, "boker"), 
+      where("side", "<", 200)
+    )
+  );
+
+  books.forEach((doc) => {
+    console.log(doc.data());
+  });
+}
+
+
+
